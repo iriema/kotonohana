@@ -44,7 +44,8 @@ SudachiPy==0.6.6
 SudachiTra==0.1.7
 thinc==8.0.17
 tokenizers==0.12.1
-torch==1.13.0
+--find-links https://download.pytorch.org/whl/torch_stable.html
+torch==1.7.1+cpu
 tqdm==4.64.1
 transformers==4.20.1
 typer==0.4.2
