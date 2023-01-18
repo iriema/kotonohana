@@ -13,7 +13,7 @@ gunicorn==20.1.0
 huggingface-hub==0.11.1
 idna==3.4
 itsdangerous==2.1.2
-ja-ginza-electra==5.1.0
+ja-ginza==5.1.2
 Jinja2==3.1.2
 langcodes==3.3.0
 logzero==1.7.0

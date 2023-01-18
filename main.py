@@ -6,7 +6,7 @@ import spacy
 app = Flask(__name__)
 #モデルの読み込み
 
-nlp = spacy.load('ja_ginza_electra')
+nlp = spacy.load('ja_ginza')
 
 #トップページの表示
 @app.route("/",methods=["GET"])
