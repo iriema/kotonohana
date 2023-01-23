@@ -135,8 +135,8 @@
 
         margin-top:15vw;
         position:relative;
-        overflow-x: scroll;
-        overflow-y: scroll;
+        overflow: scroll;
+        
         -ms-overflow-style: none;
         scrollbar-width: none;
         

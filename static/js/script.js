@@ -86,6 +86,7 @@ function setup() {
   
   
   
+  
   //ここから植物の描画処理
   
 
@@ -94,8 +95,8 @@ function setup() {
 function draw(jarr,word_arr,id_arr,head_arr, pos_arr,read_arr,jpos_arr,stemWeight_arr) {
   background(0);
 
-  
-  //scale(windowWidth / (id_arr.length * windowWidth * 0.2));
+  push();
+  scale(windowWidth / (id_arr.length * windowWidth * 0.13));
   //console.log(id_arr.length);
 //ROOTの取り出し
     for (var a in jarr) {
@@ -298,6 +299,7 @@ for (let c = 0; c < id_arr.length; c++) {
       }
     }
   }
+  pop();
 }
 //母音
 function colorHue(words){
@@ -427,10 +429,10 @@ function countWordLengths(words) {
 
 function stem(x1, y1, x2, y2,stemWeight,jpos_arr,saturation,lineStyle,word) {
   
-  var ix1 = 100+x1 * 70;
-  var ix2 = 100+x2 * 70;
-  var iy1 = 50+y1 * 50;
-  var iy2 = 50+y2 * 50;
+  var ix1 = windowWidth/10 + x1 * 70;
+  var ix2 =  windowWidth/10 + x2 * 70;
+  var iy1 =  windowHeight/10 + y1 * 50;
+  var iy2 =  windowHeight/10 + y2 * 50;
   strokeCap(ROUND);
   strokeWeight(stemWeight);
   stroke(100, saturation, 60, 100);
@@ -474,39 +476,38 @@ return stemWeight;
 stemWeight_arr = stemWeight(jpos_arr);
 
 function drawText(x1, y1,x2,y2,jpos_arr,word){
-  var ix1 = 100+x1 * 70;
-  var ix2 = 100+x2 * 70;
-  var iy1 = 50+y1 * 50;
-  var iy2 = 50+y2 * 50;
+  var ix1 = windowWidth/10 + x1 * 70;
+  var ix2 =  windowWidth/10 + x2 * 70;
+  var iy1 =  windowHeight/10 + y1 * 50;
+  var iy2 =  windowHeight/10 + y2 * 50;
   textFont('Zen Kaku Gothic New');
     if (x1 === root) {
-      text(word, ix1-40, iy1+ 250 );
+      //text(word, ix1-40, iy1+ 250 );
       strokeWeight(1.7);
-      waveLine(0,iy1+ 250,windowWidth,iy1+ 250);
+      waveLine(0,iy1+ 250,windowWidth*2,iy1+ 250);
     } else if (y1 === x2 && x2 === root) {
       if (word === "。" || word === "."||word === "、" || word === ",") {
         noFill();
         stroke(0,0,0,0);
       }else{stroke(255,100);
         strokeWeight(1);}
-      text(word, ix1-35, iy1-10 );
+      //text(word, ix1-35, iy1-10 );
     } else if (y1 === x2 && x2 !== root) {
       if (word === "。" || word === "."||word === "、" || word === ",") {
         noFill();
         stroke(0,0,0,0);
       }else{stroke(255,100);
         strokeWeight(1);}
-      text(word, ix1-35, iy1-10 );
+      //text(word, ix1-35, iy1-10 );
     }
     
 }
 
 function flower_position(x1, y1, x2, y2, count_p, count_o, part, wtype_arr, wcount_arr,jpos_arr,saturation,read_arr,word) {
-  var ix1 = 100+x1 * 70;
-  var ix2 = 100+x2 * 70;
-  var iy1 = 50+y1 * 50;
-  var iy2 = 50+y2 * 50;
-
+  var ix1 = windowWidth/10 + x1 * 70;
+  var ix2 =  windowWidth/10 + x2 * 70;
+  var iy1 =  windowHeight/10 + y1 * 50;
+  var iy2 =  windowHeight/10 + y2 * 50;
   if (x1 === root) {
     console.log(root);
 
@@ -854,9 +855,9 @@ function petal(type,size,a,ang,pattern,lineStyle){
   curveVertex(0,0-a);
   curveVertex(0,0-a);
   curveVertex(-35*size,-45*size-a);
-  curveVertex(-20*size,-90*size-a);
-  curveVertex(0,-75*size-a);
-  curveVertex(20*size,-90*size-a);
+  curveVertex(-20*size,-80*size-a);
+  curveVertex(0,-65*size-a);
+  curveVertex(20*size,-80*size-a);
   curveVertex(35*size,-45*size-a);
   curveVertex(0,0-a);
   curveVertex(0,0-a);
@@ -1135,7 +1136,7 @@ function stamenA(ox, oy, count_o) {
   rotate(random(360));
   strokeWeight(3);
   fill(10, 0, 100, 100);
-  stroke(10, 0, 100, 80);
+  stroke(10, 0, 100, 100);
   for (var ang = 0; ang < 360; ang += 360 / count_o) {
     var x = 25 * cos(ang);
     var y = 25 * sin(ang);
@@ -1156,7 +1157,7 @@ function stamenB(ox, oy, count_o,saturation) {
   rotate(random(360));
   strokeWeight(3);
   fill(90, saturation, 100, 100);
-  stroke(90, saturation, 100, 80);
+  stroke(90, saturation, 100, 100);
   for (var ang = 0; ang < 360; ang += 360 / count_o) {
     var x = 25 * cos(ang);
     var y = 25 * sin(ang);
@@ -1174,8 +1175,8 @@ function stamenC(ox, oy, count_o,saturation) {
   translate(ox, oy);
   rotate(random(360));
   strokeWeight(3);
-  fill(40, saturation, 100, 100);
-  stroke(40, saturation, 100, 80);
+  fill(60, saturation, 100, 100);
+  stroke(60, saturation, 100, 100);
   for (var ang = 0; ang < 360; ang += 360 / count_o) {
     var x = 25 * cos(ang);
     var y = 25 * sin(ang);
@@ -1245,7 +1246,7 @@ function rootB(ox, oy, count_o,saturation){
   rotate(55);
   strokeWeight(3);
   fill(90, saturation, 100, 100);
-  stroke(90, saturation, 100, 80);
+  stroke(90, saturation, 100, 100);
   strokeCap(ROUND);
   for (var ang = 0; ang < 135; ang += 135 / count_o) {
     var x = 200 * cos(ang);
@@ -1260,8 +1261,8 @@ function rootC(ox, oy,count_o,saturation) {
   translate(ox, oy);
   rotate(55);
   strokeWeight(3);
-  fill(40,saturation, 100, 100);
-  stroke(40,saturation, 100, 80);
+  fill(60,saturation, 100, 100);
+  stroke(60,saturation, 100, 100);
   strokeCap(ROUND);
   for (var ang = 0; ang < 135; ang += 135 / count_o) {
     var x = 200 * cos(ang);
@@ -1367,7 +1368,7 @@ function tatezima(ox,oy){
     var x = 23 * cos(ang);
     var y = 23 * sin(ang);
     line(x, y, 3*x, 3*y);
-    line(1.5*x, 1.5*y,3*x, 3*y);
+    line(1.5*x, 1.5*y,3.2*x, 3.2*y);
     
   }
   
@@ -1394,3 +1395,13 @@ function yoko(ox,oy){
   
   pop();
 } 
+function keyPressed() {
+  let text ;
+  if (key === 's'){
+    for (let i = 0; i < word_arr.length; i++) {
+      text += word_arr[i];
+          
+          }
+          saveCanvas(canvas, text, 'png');
+        }
+    }
