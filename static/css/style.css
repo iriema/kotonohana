@@ -1,78 +1,221 @@
 @charset "UTF-8";
+/*スマホサイズ*/
 
-body{
-    background-color: #000000;
-}
+@media screen and (max-width: 481px){
+    body{
+        background-color: #000000;
+        
+    }
+    
+    
+    h1{ font-family:Arial, Helvetica, sans-serif;
+        margin: 3vw;
+        width:40vw;
+        font-size:7vw;
+        color: #fff;
+    
+    }
+    
+    textarea{
+        font-family: 'Zen Kaku Gothic New', sans-serif;
+        text-align: justify;
+        width: 93vw;
+        margin: 3vw;
+        margin-top: 0vw;
+        padding: 4vw;
+        font-size:4.5vw;
+        font-weight: 500;
+        background-color: #000000;
+        border: 2.5px solid #fff;
+        border-radius: 2vw;
+        color: #fff;
+    
+    }
+    
+    button{
+        font-family: 'Zen Kaku Gothic New', sans-serif;
+        text-align: center;
+        width: 60vw;
+        height: 13vw;
+        padding: 3vw 3vw;
+        margin-left: 3vw;
+        margin-bottom: 3vw;
+        font-size:4.5vw;
+        font-weight: 500;
+        color: #000000;
+        background-color: #fff;
+        border-radius: 50vw;
+        border: solid #fff;
+        
+    }
+    
+    #karitori{
+        width: 13vw;
+        height: 13vw;
+        padding: 3vw 3vw;
+        margin-left: 3vw;
+        margin-top: 0;
+        margin-bottom: 0;
+        font-size:5vw;
+        font-weight: 400;
+        background: url("/static/img/reload.svg") no-repeat;
+        background-size: 45%;
+        background-position: 50%;
+        background-color: #000000;
+        border-radius: 50%;
+        border: 2.5px solid #fff;
+    }
+    #tumitori{
+        width: 13vw;
+        height: 13vw;
+        padding: 3vw 3vw;
+        margin-left: 3vw;
+        margin-top: 0;
+        margin-bottom: 0;
+        font-size:5vw;
+        background: url("/static/img/text2.svg") no-repeat;
+        background-size: 70%;
+        background-position: 50%;
+        background-color: #000000;
+        border-radius: 50%;
+        border: 2.5px solid #fff;
+    }
+    
+    
+    
+    div.button1{
+        display: flex;
+        justify-content: left;
+        }
+    #center_body{
+        position: fixed;
+        top:0; 
+        z-index: 2;
+    }
+    #container1{
 
-
-h1{ font-family: Arial, Helvetica, sans-serif;
-    margin-left: 3vw;
-    font-size:7vw;
-    color: #fff;
-
-}
-
-textarea{
-    margin-left: 3vw;
-    text-align: justify;
-    width: 84%;
-    margin: 3vw;
-    padding: 4vw;
-    font-size:4.5vw;
-    background-color: #000000;
-    border: 2.5px solid #fff;
-    border-radius: 2vw;
-    color: #fff;
-
-}
-
-button{
-    width: 55vw;
-    height: 13vw;
-    padding: 3vw 3vw;
-    margin-left: 3vw;
-    margin-bottom: 3vw;
-    font-size:4.5vw;
-    background-color: #fff;
-    border-radius: 50vw;
-    border: solid #fff;
+        margin-top: 50vw;
+        position:relative;
+        overflow-x: scroll;
+        overflow-y: scroll;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+        
+        z-index: 1;
+    }
+    #container1::-webkit-scrollbar{
+        display: none;
+      }
     
 }
-
-#karitori{
-    width: 13vw;
-    height: 13vw;
-    padding: 3vw 3vw;
-    margin-left: 3vw;
-    margin-top: 0;
-    margin-bottom: 0;
-    font-size:5vw;
-    background: url("/static/img/delete.svg") no-repeat;
-    background-size: 45%;
-    background-position: 50%;
-    background-color: #000000;
-    border-radius: 50%;
-    border: 2.5px solid #fff;
-}
-#tumitori{
-    width: 13vw;
-    height: 13vw;
-    padding: 3vw 3vw;
-    margin-left: 3vw;
-    margin-top: 0;
-    margin-bottom: 0;
-    font-size:5vw;
-    background: url("/static/img/text.svg") no-repeat;
-    background-size: 45%;
-    background-position: 50%;
-    background-color: #000000;
-    border-radius: 50%;
-    border: 2.5px solid #fff;
-}
-
-
-
-div.button1{
-    display: flex;
-    justify-content: left;
+/*PCサイズ*/
+@media screen and (min-width: 481px){
+    
+    body{
+        background-color: #000000;
+        
     }
+    
+    
+    h1{ 
+        font-family:Arial, Helvetica, sans-serif;
+        width:10vw;
+        margin:1.2vw;
+        font-size:2vw;
+        color: #fff;
+    
+    }
+   
+    #center_body{
+        position: fixed;
+        top:0; 
+        z-index: 2;
+    }
+    #container1{
+
+        margin-top:15vw;
+        position:relative;
+        overflow-x: scroll;
+        overflow-y: scroll;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+        
+        z-index: 1;
+    }
+    #container1::-webkit-scrollbar{
+        display: none;
+      }
+    
+
+    textarea{
+        font-family: 'Zen Kaku Gothic New', sans-serif;
+        text-align: justify;
+        width: 25vw;
+        margin: 1.2vw;
+        margin-top: 0;
+        margin-bottom: 1.2vw;
+        padding: 1vw;
+        font-size:1vw;
+        font-weight: 500;
+        background-color: #000000;
+        border: 2.5px solid #fff;
+        border-radius: 0.75vw;
+        color: #fff;
+    
+    }
+    
+    button{
+        font-family: 'Zen Kaku Gothic New', sans-serif;
+        text-align: center;
+        width: 17vw;
+        height: 3vw;
+        
+        margin-left: 1.2vw;
+        margin-bottom: 3vw;
+        font-size:1vw;
+        text-align: center;
+        font-weight: 500;
+        color: #000000;
+        background-color: #fff;
+        border-radius: 50vw;
+        border: solid #fff;
+        
+    }
+    
+    #karitori{
+        width: 3vw;
+        height: 3vw;
+        margin-left: 1vw;
+        margin-top: 0;
+        margin-bottom: 0;
+        font-size:5vw;
+        font-weight: 400;
+        background: url("/static/img/reload.svg") no-repeat;
+        background-size: 45%;
+        background-position: 50%;
+        background-color: #000000;
+        border-radius: 50%;
+        border: 2.5px solid #fff;
+    }
+    #tumitori{
+        width: 3vw;
+        height: 3vw;
+        margin-left: 1vw;
+        margin-top: 0;
+        margin-bottom: 0;
+        font-size:5vw;
+        background: url("/static/img/text2.svg") no-repeat;
+        background-size: 70%;
+        background-position: 50%;
+        background-color: #000000;
+        border-radius: 50%;
+        border: 2.5px solid #fff;
+    }
+    
+   
+    
+    div.button1{
+        display: flex;
+        justify-content: left;
+        }
+ }

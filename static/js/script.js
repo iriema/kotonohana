@@ -83,8 +83,7 @@ function setup() {
   rectMode(CENTER);
   angleMode(DEGREES);
   
-  background(0);
-
+  
   
   
   //ここから植物の描画処理
@@ -93,9 +92,11 @@ function setup() {
 }
 
 function draw(jarr,word_arr,id_arr,head_arr, pos_arr,read_arr,jpos_arr,stemWeight_arr) {
-  scale(1);
-  scale(windowWidth / (id_arr.length * windowWidth * 0.2));
-  console.log(id_arr.length);
+  background(0);
+
+  
+  //scale(windowWidth / (id_arr.length * windowWidth * 0.2));
+  //console.log(id_arr.length);
 //ROOTの取り出し
     for (var a in jarr) {
       if (jarr[a].dep === "ROOT") {
@@ -106,7 +107,7 @@ function draw(jarr,word_arr,id_arr,head_arr, pos_arr,read_arr,jpos_arr,stemWeigh
     }
     //植物の彩度
   let saturation;
-  const tense = jarr.some((t) => (t.jpos === "助動詞" && t.word==="た" && t.head === root) ||(t.jpos === "助動詞" && t.word==="だ" && t.head === root));
+  const tense = jarr.some((t) => ((t.jpos === "助動詞" && t.word===("た")&& t.head === root)||(t.jpos === "助動詞" && t.word===("だ")&& t.head === root)));
   if(tense === true){
   saturation = 30;
   
@@ -136,26 +137,28 @@ function draw(jarr,word_arr,id_arr,head_arr, pos_arr,read_arr,jpos_arr,stemWeigh
 
       console.log(jpos_arr);
     
-      for (var i = 0; i < id_arr.length; i++) {
-        for (var j = 0; j < head_arr.length; j++) {
+      for (let i = 0; i < id_arr.length; i++) {
+        for (let j = 0; j < head_arr.length; j++) {
           if (id_arr[j] === head_arr[i]) {
-            
-    
-stemWeight_arr = stemWeight(jpos_arr);
-
-stem(id_arr[i], id_arr[j], head_arr[i], head_arr[j], word_arr[i],stemWeight_arr[i],jpos_arr[i],saturation,lineStyle);
-         
+            stemWeight_arr = stemWeight(jpos_arr);
+            stem(
+              id_arr[i],
+              id_arr[j], 
+              head_arr[i], 
+              head_arr[j],
+              stemWeight_arr[i],
+              jpos_arr[i],
+              saturation,
+              lineStyle,
+              word_arr[i],
+              );
+            }
           }
         }
-      }
-     
-      for (var a = 0; a < id_arr.length; a++) {
-        for (var b = 0; b < head_arr.length; b++) {
+        angleMode(DEGREES);
+      for (let a = 0; a < id_arr.length; a++) {
+        for (let b = 0; b < head_arr.length; b++) {
           if (id_arr[b] === head_arr[a]) {
-            
-            
-    
-            
             flower_position(
               id_arr[a],
               id_arr[b],
@@ -169,8 +172,7 @@ stem(id_arr[i], id_arr[j], head_arr[i], head_arr[j], word_arr[i],stemWeight_arr[
               jpos_arr[a],
               saturation,
               read_arr[a],
-
-              
+              word_arr[a], 
             );
             
           }
@@ -258,74 +260,81 @@ if(filterRed === true){
   
   pop();
 }
+let filterWhite = jarr.some((f) => (f.jpos === "名詞-普通名詞-一般" && f.lemma==="白" ) ||(f.jpos === "名詞-普通名詞-一般" && f.lemma==="シロ" )||(f.jpos === "名詞-普通名詞-一般" && f.lemma==="しろ" )||(f.jpos === "名詞-普通名詞-一般" && f.lemma==="白色" )||(f.jpos === "名詞-普通名詞-一般" && f.lemma==="しろ色" )||(f.jpos === "名詞-普通名詞-一般" && f.lemma==="シロ色" )||
+(f.jpos === "形容詞-一般" && f.lemma==="白い" ) ||(f.jpos === "形容詞-一般" && f.lemma==="シロイ" ) ||(f.jpos === "形容詞-一般" && f.lemma==="しろい" ));
+if(filterWhite === true){
+  push();
+  noStroke();
+  blendMode(DODGE);
+  fill(0,0,100,65);
+  rectMode(CORNER);
+  rect(0,0,windowWidth,windowHeight);
+  
+  pop();
+}
 
+let filterBlack = jarr.some((f) => (f.jpos === "名詞-普通名詞-一般" && f.lemma==="黒" ) ||(f.jpos === "名詞-普通名詞-一般" && f.lemma==="クロ" )||(f.jpos === "名詞-普通名詞-一般" && f.lemma==="くろ" )||(f.jpos === "名詞-普通名詞-一般" && f.lemma==="黒色" )||(f.jpos === "名詞-普通名詞-一般" && f.lemma==="くろ色" )||(f.jpos === "名詞-普通名詞-一般" && f.lemma==="クロ色" )||
+(f.jpos === "形容詞-一般" && f.lemma==="黒い" ) ||(f.jpos === "形容詞-一般" && f.lemma==="クロイ" ) ||(f.jpos === "形容詞-一般" && f.lemma==="くろい" ));
+if(filterBlack === true){
+  push();
+  noStroke();
+  blendMode(HARD_LIGHT);
+  fill(20,0,10,85);
+  rectMode(CORNER);
+  rect(0,0,windowWidth,windowHeight);
+  
+  pop();
+}
+for (let c = 0; c < id_arr.length; c++) {
+  for (let d = 0; d < head_arr.length; d++) {
+    if (id_arr[d] === head_arr[c]) {
+      drawText(id_arr[c],
+               id_arr[d],
+               head_arr[c],
+               head_arr[d],
+               jpos_arr[c],
+               word_arr[c],
+               );
+      }
+    }
+  }
 }
 //母音
-function vowelLeaf(words){
-  let total = 0;
-  const vowelA = "アァカサタナハマラヤャワガザダバパ";
-  const vowelI = "イィキシチニヒミリギジヂビピ";
-  const vowelU = "ウゥクスツヌフムルユュグズヅブプ";
-  const vowelE = "エェケセテネヘメレゲゼデベペ";
-  const vowelO = "オォコソトノホモヨョロヲゴゾドボポ";
-  const vowelN = "ン";
+function colorHue(words){
   for (let i = 0; i < words.length; i++) {
     const word = words[i];
-    // 単語の中に該当する母音があったら数値を足していく
-    for (let j = 0; j < word.length; j++) {
-      if (vowelI.indexOf(word[j]) !== -1) {
-        total  += 60
-      }else if (vowelA.indexOf(word[j]) !== -1) {
-        total  += 105
-      }else if(vowelE.indexOf(word[j]) !== -1) {
-        total  += 150
-      }else if(vowelU.indexOf(word[j]) !== -1) {
-        total  += 195
-      }else if(vowelN.indexOf(word[j]) !== -1) {
-        total  += 210
-      }else if(vowelO.indexOf(word[j]) !== -1) {
-        total  += 240
-      }
+    let color;
+    let lastChar = word.slice(-1);
+    if(lastChar === "ー") {
+      lastChar = word.slice(-2, -1);
     }
-    let result = total / word.length;
-  console.log(result);
-  return result;
-  }
-  
-}
-function vowelFlower(words){
-  let total = 0;
-  const vowelA = "アァカサタナハマヤラャワガザダバパ";
-  const vowelI = "イィキシチニヒミリギジヂビピ";
-  const vowelU = "ウゥクスツヌフムルユュグズヅブプ";
-  const vowelE = "エェケセテネヘメレゲゼデベペ";
-  const vowelO = "オォコソトノホモヨョロヲゴゾドボポ";
-  const vowelN = "ン";
-  for (let i = 0; i < words.length; i++) {
-    const word = words[i];
-    // 単語の中に該当する母音があったら数値を足していく
-    for (let j = 0; j < word.length; j++) {
-      if (vowelI.indexOf(word[j]) !== -1) {
-        total  += 60
-      }else if (vowelA.indexOf(word[j]) !== -1) {
-        total  += 15
-      }else if(vowelE.indexOf(word[j]) !== -1) {
-        total  += 330
-      }else if(vowelU.indexOf(word[j]) !== -1) {
-        total  += 295
-      }else if(vowelN.indexOf(word[j]) !== -1) {
-        total  += 280
-      }else if(vowelO.indexOf(word[j]) !== -1) {
-        total  += 240
-      }
+    console.log(lastChar);
+    switch(lastChar) {
+      case "ア":case "ァ":case "カ":case "サ":case"タ":case"ナ":case"ハ":case"マ":case"ラ":case"ヤ": case"ャ":case"ワ":case"ガ":case"ザ":case"ダ":case"バ":case"パ":
+        color = int(random(330,360))||int(random(0,30));
+        break;
+      case "イ":case"ィ":case"キ":case"シ":case"チ":case"ニ":case"ヒ":case"ミ":case"リ":case"ギ":case"ジ":case"ヂ":case"ビ":case"ピ":
+        color = int(random(30,90));
+        break;
+      case "ウ": case"ゥ":case "ク":case "ス":case "ツ":case "ヌ":case "フ":case "ム":case "ル":case "ユ":case "ュ":case"グ":case "ズ":case "ヅ":case "ブ":case "プ":
+        color = int(random(90,150));
+        break;
+      case "エ":case "ェ":case "ケ":case "セ":case "テ":case "ネ":case "ヘ":case "メ":case "レ":case "ゲ":case "ゼ":case "デ":case "ベ":case "ペ":
+        color = int(random(270,330));
+        break;
+      case "オ":case "ォ":case "コ":case "ソ":case "ト":case "ノ":case "ホ":case "モ":case "ヨ":case "ョ":case "ロ":case "ヲ":case "ゴ":case "ゾ":case "ド":case "ボ":case "ポ":
+        color = int(random(210,270));
+        break;
+      case "ン":
+        color = int(random(150,210));
+        break;
+      default:
+        color = 0;
     }
-    let result = total / word.length;
-  console.log(result);
-  return result;
+    console.log(color);
+    return color;
   }
-  
 }
-
 //濁音を判断
 function Dakuon(words){
   const dakuonChars = "ガギグゲゴザジズゼゾダヂヅデドバビブベボヴヷヸヹヺパピプペポ";
@@ -336,6 +345,8 @@ function Dakuon(words){
       if (dakuonChars.includes(word[j])) {
         
         return 90;
+      }else if((word === "。" )||( word === ".")||(word === "、" )|| (word === ",")) {
+        return 0;
       }else{
         
         return 50;
@@ -414,66 +425,32 @@ function countWordLengths(words) {
   return lengths;
 }
 
-function stem(x1, y1, x2, y2, word,stemWeight,jpos_arr,saturation,lineStyle) {
+function stem(x1, y1, x2, y2,stemWeight,jpos_arr,saturation,lineStyle,word) {
   
-  var ix1 = windowWidth / 7 + x1 * 50;
-  var ix2 = windowWidth / 7 + x2 * 50;
-  var iy1 = windowHeight / 7 + y1 * 50;
-  var iy2 = windowHeight / 7 + y2 * 50;
-
-  
-  
+  var ix1 = 100+x1 * 70;
+  var ix2 = 100+x2 * 70;
+  var iy1 = 50+y1 * 50;
+  var iy2 = 50+y2 * 50;
+  strokeCap(ROUND);
   strokeWeight(stemWeight);
   stroke(100, saturation, 60, 100);
+  if ((word === "。" || word === "."||word === "、" || word === ",")){
+    noStroke();}
   noFill();
-  if ((jpos_arr === "補助記号-読点")||(jpos_arr === "補助記号-句点")) {
-    stroke(0,0,0,0);
-    fill(0,0,0,0);
-}
 if(lineStyle===1){
   if (x1 === root) {
-    push();
-    stroke(255,100);
-    strokeWeight(1);
-    text(word, ix1-100, iy1-100);
-    pop();
     //line(ix1, iy1, ix2, iy2);
   } else if (y1 === x2 && x2 === root) {
-    push();
-    stroke(255,100);
-    strokeWeight(1);
-    text(word, ix1, iy1 );
-    pop();
-    line(ix1, iy1, ix2, iy2 + 100);
+    spiralLine(ix1, iy1, ix2, iy2 + 250);
   } else if (y1 === x2 && x2 !== root) {
-    push();
-    stroke(255,100);
-    strokeWeight(1);
-    text(word, ix1, iy1 );
-    pop();
-    line(ix1, iy1, ix2, iy2);
+    spiralLine(ix1, iy1, ix2, iy2);
   }
 }else if(lineStyle===2){
   if (x1 === root) {
-    push();
-    stroke(255,100);
-    strokeWeight(1);
-    text(word, ix1, iy1 );
-    pop();
-    waveLine(ix1, iy1, ix2, iy2);
+    //waveLine(ix1, iy1, ix2, iy2);
   } else if (y1 === x2 && x2 === root) {
-    push();
-    stroke(255,100);
-    strokeWeight(1);
-    text(word, ix1+30, iy1 );
-    pop();
-    waveLine(ix1, iy1, ix2, iy2 + 100);
+    waveLine(ix1, iy1, ix2, iy2 + 250);
   } else if (y1 === x2 && x2 !== root) {
-    push();
-    stroke(255,100);
-    strokeWeight(1);
-    text(word, ix1, iy1+100 );
-    pop();
     waveLine(ix1, iy1, ix2, iy2);
   }
 }
@@ -496,14 +473,39 @@ return stemWeight;
 }
 stemWeight_arr = stemWeight(jpos_arr);
 
+function drawText(x1, y1,x2,y2,jpos_arr,word){
+  var ix1 = 100+x1 * 70;
+  var ix2 = 100+x2 * 70;
+  var iy1 = 50+y1 * 50;
+  var iy2 = 50+y2 * 50;
+  textFont('Zen Kaku Gothic New');
+    if (x1 === root) {
+      text(word, ix1-40, iy1+ 250 );
+      strokeWeight(1.7);
+      waveLine(0,iy1+ 250,windowWidth,iy1+ 250);
+    } else if (y1 === x2 && x2 === root) {
+      if (word === "。" || word === "."||word === "、" || word === ",") {
+        noFill();
+        stroke(0,0,0,0);
+      }else{stroke(255,100);
+        strokeWeight(1);}
+      text(word, ix1-35, iy1-10 );
+    } else if (y1 === x2 && x2 !== root) {
+      if (word === "。" || word === "."||word === "、" || word === ",") {
+        noFill();
+        stroke(0,0,0,0);
+      }else{stroke(255,100);
+        strokeWeight(1);}
+      text(word, ix1-35, iy1-10 );
+    }
+    
+}
 
-
-function flower_position(x1, y1, x2, y2, count_p, count_o, part, wtype_arr, wcount_arr,jpos_arr,saturation,read_arr) {
-  var ix1 = windowWidth / 7 + x1 * 50;
-  var ix2 = windowWidth / 7 + x2 * 50;
-  var iy1 = windowHeight / 7 + y1 * 50;
-  var iy2 = windowHeight / 7 + y2 * 50;
-
+function flower_position(x1, y1, x2, y2, count_p, count_o, part, wtype_arr, wcount_arr,jpos_arr,saturation,read_arr,word) {
+  var ix1 = 100+x1 * 70;
+  var ix2 = 100+x2 * 70;
+  var iy1 = 50+y1 * 50;
+  var iy2 = 50+y2 * 50;
 
   if (x1 === root) {
     console.log(root);
@@ -511,94 +513,94 @@ function flower_position(x1, y1, x2, y2, count_p, count_o, part, wtype_arr, wcou
     if ((jpos_arr === "名詞-普通名詞-一般")||(jpos_arr === "名詞-普通名詞-サ変可能")||(jpos_arr === "名詞-普通名詞-形状詞可能")||(jpos_arr === "名詞-普通名詞-サ変形状詞可能")||
     (jpos_arr === "名詞-普通名詞-副詞可能")||(jpos_arr === "名詞-普通名詞-助数詞可能")||(jpos_arr === "名詞-助動詞語幹")) {
       //名詞
-      rootA(ix1, iy1 + 100, count_o);
+      rootA(ix1, iy1 + 250, count_o);
     } else if ((jpos_arr === "名詞-固有名詞-一般")||(jpos_arr === "名詞-固有名詞-人名-一般")||(jpos_arr === "名詞-固有名詞-人名-姓")||
                (jpos_arr === "名詞-固有名詞-人名-名")||(jpos_arr === "名詞-固有名詞-地名-一般")||(jpos_arr === "名詞-固有名詞-地名-国")) {
       //固有名詞
-      rootA(ix1, iy1 + 100, count_o);
+      rootA(ix1, iy1 + 250, count_o);
     }else if (jpos_arr === "代名詞") {
       //代名詞
-      rootA(ix1, iy1 + 100, count_o);
+      rootA(ix1, iy1+ 250, count_o);
     } else if ((jpos_arr === "動詞-一般")||(jpos_arr === "動詞-非自立可能")) {
       //動詞
-      rootB(ix1, iy1 + 100, count_o);
+      rootB(ix1, iy1 + 250, count_o,saturation);
     } else if ((jpos_arr === "形容詞-一般")||(jpos_arr === "形容詞-非自立可能")) {
       //形容詞
-      rootC(ix1, iy1 + 100, count_o);
+      rootC(ix1, iy1 + 250, count_o,saturation);
     }else if ((jpos_arr === "形状詞-一般")||(jpos_arr === "形状詞-タリ")||(jpos_arr === "形状詞-助動詞語幹")) {
       //形状詞
-      rootC(ix1, iy1 + 100, count_o);
+      rootC(ix1, iy1 + 250, count_o,saturation);
     }else if (jpos_arr === "連体詞"){
       //連体詞
-      rootC(ix1, iy1 + 100, count_o);
+      rootC(ix1, iy1 + 250, count_o,saturation);
     }else if (jpos_arr === "副詞"){
       //副詞
-      rootC(ix1, iy1 + 100, count_o);
+      rootC(ix1, iy1 + 250, count_o,saturation);
     }else if (jpos_arr === "助動詞"){
       //助動詞
-      rootD(ix1, iy1 + 100, count_o);
+      rootD(ix1, iy1 + 250, count_o);
     }else if((jpos_arr === "接尾辞-名詞的-一般")||(jpos_arr === "接尾辞-名詞的-サ変可能")||(jpos_arr === "接尾辞-名詞的-形状詞可能")||
              (jpos_arr === "接尾辞-名詞的-サ変形状詞可能")||(jpos_arr === "接尾辞-名詞的-副詞可能")||(jpos_arr === "接尾辞-名詞的-助数詞")||
              (jpos_arr === "接尾辞-形状詞的")||(jpos_arr === "接尾辞-動詞的")||(jpos_arr === "接尾辞-形容詞的")){
       //接尾辞
-      rootD(ix1, iy1 + 100, count_o);
+      rootD(ix1, iy1 + 250, count_o);
     }else if((jpos_arr === "接頭辞")){
       //接頭辞
-      rootD(ix1, iy1 + 100, count_o);
+      rootD(ix1, iy1 + 250, count_o);
     }else if(jpos_arr === "接続詞"){
       //接続詞
-      rootD(ix1, iy1 + 100, count_o);
+      rootD(ix1, iy1 + 250, count_o);
     }else if((jpos_arr === "助詞-格助詞")||(jpos_arr === "助詞-副助詞")||(jpos_arr === "助詞-係助詞")||
              (jpos_arr === "助詞-接続助詞")||(jpos_arr === "助詞-終助詞")||(jpos_arr === "助詞-準体助詞")){
       //助詞
-      rootD(ix1, iy1 + 100, count_o);
-    }else if((jpos_arr === "名詞-数詞")||(jpos_arr === "記号-一般")||(jpos_arr === "記号-文字")||(jpos_arr === "補助記号-一般")||
-    (jpos_arr === "補助記号-括弧開")||(jpos_arr === "補助記号-括弧閉")||(jpos_arr === "補助記号-ＡＡ-一般")||(jpos_arr === "補助記号-ＡＡ-顔文字")){
+      rootD(ix1, iy1 + 250, count_o);
+    }else if((jpos_arr === "名詞-数詞")||(jpos_arr === "記号-一般")||(jpos_arr === "記号-文字")||(jpos_arr === "補助記号-一般")||(jpos_arr === "補助記号-読点")||(jpos_arr === "補助記号-句点")||
+    (jpos_arr === "補助記号-括弧開")||(jpos_arr === "補助記号-括弧閉")||(jpos_arr === "補助記号-AA-一般")||(jpos_arr === "補助記号-AA-顔文字")){
       //数詞と感動詞と記号と補助句号
-      rootD(ix1, iy1 + 100, count_o);
+      rootD(ix1, iy1 + 250, count_o);
     }else{
       //当分は色なしの白い葉っぱ
-      rootD(ix1, iy1 + 100, count_o);
+      rootD(ix1, iy1 + 250, count_o);
     }
   } else if (y1 === x2 && x2 === root) {
     if ((jpos_arr === "名詞-普通名詞-一般")||(jpos_arr === "名詞-普通名詞-サ変可能")||(jpos_arr === "名詞-普通名詞-形状詞可能")||(jpos_arr === "名詞-普通名詞-サ変形状詞可能")||
     (jpos_arr === "名詞-普通名詞-副詞可能")||(jpos_arr === "名詞-普通名詞-助数詞可能")||(jpos_arr === "名詞-助動詞語幹")) {
       //名詞
       flowerA1(ix1, iy1 , wtype_arr,jpos_arr,saturation,read_arr);
-      stamen(ix1, iy1 , count_o);
+      stamenA(ix1, iy1 , count_o);
     } else if ((jpos_arr === "名詞-固有名詞-一般")||(jpos_arr === "名詞-固有名詞-人名-一般")||(jpos_arr === "名詞-固有名詞-人名-姓")||
                (jpos_arr === "名詞-固有名詞-人名-名")||(jpos_arr === "名詞-固有名詞-地名-一般")||(jpos_arr === "名詞-固有名詞-地名-国")) {
       //固有名詞
       flowerA2(ix1, iy1 , wtype_arr,jpos_arr,saturation,read_arr);
-      stamen(ix1, iy1 , count_o);
+      stamenA(ix1, iy1 , count_o);
     }else if (jpos_arr === "代名詞") {
       //代名詞
       flowerA3(ix1, iy1 , wtype_arr,jpos_arr,saturation,read_arr);
-      stamen(ix1, iy1, count_o);
+      stamenA(ix1, iy1, count_o);
     
     
     } else if ((jpos_arr === "動詞-一般")||(jpos_arr === "動詞-非自立可能")) {
       //動詞
       flowerB(ix1, iy1, wtype_arr,jpos_arr,saturation,read_arr);
-      stamen(ix1, iy1, count_o);
+      stamenB(ix1, iy1, count_o,saturation);
       
     } else if ((jpos_arr === "形容詞-一般")||(jpos_arr === "形容詞-非自立可能")) {
       //形容詞
       flowerC1(ix1, iy1, wtype_arr,jpos_arr,saturation,read_arr);
-      stamen(ix1, iy1, count_o);
+      stamenC(ix1, iy1, count_o,saturation);
     }else if ((jpos_arr === "形状詞-一般")||(jpos_arr === "形状詞-タリ")||(jpos_arr === "形状詞-助動詞語幹")) {
       //形状詞
       flowerC2(ix1, iy1, wtype_arr,jpos_arr,saturation,read_arr);
-      stamen(ix1, iy1, count_o);
+      stamenC(ix1, iy1, count_o,saturation);
 
     }else if (jpos_arr === "連体詞"){
       //連体詞
       flowerC3(ix1, iy1, wtype_arr,jpos_arr,saturation,read_arr);
-      stamen(ix1, iy1, count_o);
+      stamenC(ix1, iy1, count_o,saturation);
     }else if (jpos_arr === "副詞"){
       //副詞
       flowerC4(ix1, iy1, wtype_arr,jpos_arr,saturation,read_arr);
-      stamen(ix1, iy1, count_o);
+      stamenC(ix1, iy1, count_o,saturation);
     }else if (jpos_arr === "助動詞"){
       //助動詞
       leafA(ix1, iy1, wtype_arr,jpos_arr,saturation,read_arr);
@@ -612,15 +614,19 @@ function flower_position(x1, y1, x2, y2, count_p, count_o, part, wtype_arr, wcou
       leafC(ix1, iy1, wtype_arr,jpos_arr,saturation,read_arr);
     }else if(jpos_arr === "接続詞"){
       //接続詞
-      leafD(ix1, iy1, wtype_arr,jpos_arr,saturation,read_arr);
+      leafD(ix1, iy1, wtype_arr,jpos_arr,saturation,read_arr,word);
     }else if((jpos_arr === "助詞-格助詞")||(jpos_arr === "助詞-副助詞")||(jpos_arr === "助詞-係助詞")||
              (jpos_arr === "助詞-接続助詞")||(jpos_arr === "助詞-終助詞")||(jpos_arr === "助詞-準体助詞")){
       //助詞
       leafE(ix1, iy1, wtype_arr,jpos_arr,saturation,read_arr);
-    }else if((jpos_arr === "名詞-数詞")||(jpos_arr === "記号-一般")||(jpos_arr === "記号-文字")||(jpos_arr === "補助記号-一般")||
-    (jpos_arr === "補助記号-括弧開")||(jpos_arr === "補助記号-括弧閉")||(jpos_arr === "補助記号-ＡＡ-一般")||(jpos_arr === "補助記号-ＡＡ-顔文字")){
+    }else if((jpos_arr === "名詞-数詞")||(jpos_arr === "記号-一般")||(jpos_arr === "記号-文字")||(jpos_arr === "補助記号-一般")||(jpos_arr === "感動詞-一般")||(jpos_arr === "感動詞-フィラー")||(jpos_arr === "補助記号-読点")||(jpos_arr === "補助記号-句点")||
+    (jpos_arr === "補助記号-括弧開")||(jpos_arr === "補助記号-括弧閉")||(jpos_arr === "補助記号-AA-一般")||(jpos_arr === "補助記号-AA-顔文字")){
       //数詞と感動詞と記号と補助句号
-      flowerA1(ix1, iy1, wtype_arr,jpos_arr,saturation,read_arr);
+      if ((word === "。" )||( word === ".")||(word === "、" )|| (word === ",")) {
+        noStroke();
+    noFill();}
+      flowerA1(ix1, iy1, wtype_arr,jpos_arr,saturation,read_arr,word);
+      calyx(ix1, iy1,count_o,saturation,word);
     }else{
       //当分は色なしの白い葉っぱ
       leafF(ix1, iy1, wtype_arr,jpos_arr,saturation,read_arr);
@@ -630,40 +636,40 @@ function flower_position(x1, y1, x2, y2, count_p, count_o, part, wtype_arr, wcou
     (jpos_arr === "名詞-普通名詞-副詞可能")||(jpos_arr === "名詞-普通名詞-助数詞可能")||(jpos_arr === "名詞-助動詞語幹")) {
       //名詞
       flowerA1(ix1, iy1 , wtype_arr,jpos_arr,saturation,read_arr);
-      stamen(ix1, iy1 , count_o);
+      stamenA(ix1, iy1 , count_o);
     } else if ((jpos_arr === "名詞-固有名詞-一般")||(jpos_arr === "名詞-固有名詞-人名-一般")||(jpos_arr === "名詞-固有名詞-人名-姓")||
                (jpos_arr === "名詞-固有名詞-人名-名")||(jpos_arr === "名詞-固有名詞-地名-一般")||(jpos_arr === "名詞-固有名詞-地名-国")) {
       //固有名詞
       flowerA2(ix1, iy1 , wtype_arr,jpos_arr,saturation,read_arr);
-      stamen(ix1, iy1 , count_o);
+      stamenA(ix1, iy1 , count_o);
     }else if (jpos_arr === "代名詞") {
       //代名詞
       flowerA3(ix1, iy1 , wtype_arr,jpos_arr,saturation,read_arr);
-      stamen(ix1, iy1, count_o);
+      stamenA(ix1, iy1, count_o);
     
     
     } else if ((jpos_arr === "動詞-一般")||(jpos_arr === "動詞-非自立可能")) {
       //動詞
       flowerB(ix1, iy1, wtype_arr,jpos_arr,saturation,read_arr);
-      stamen(ix1, iy1, count_o);
+      stamenB(ix1, iy1, count_o,saturation);
       
     } else if ((jpos_arr === "形容詞-一般")||(jpos_arr === "形容詞-非自立可能")) {
       //形容詞
       flowerC1(ix1, iy1, wtype_arr,jpos_arr,saturation,read_arr);
-      stamen(ix1, iy1, count_o);
+      stamenC(ix1, iy1, count_o,saturation);
     }else if ((jpos_arr === "形状詞-一般")||(jpos_arr === "形状詞-タリ")||(jpos_arr === "形状詞-助動詞語幹")) {
       //形状詞
       flowerC2(ix1, iy1, wtype_arr,jpos_arr,saturation,read_arr);
-      stamen(ix1, iy1, count_o);
+      stamenC(ix1, iy1, count_o,saturation);
 
     }else if (jpos_arr === "連体詞"){
       //連体詞
       flowerC3(ix1, iy1, wtype_arr,jpos_arr,saturation,read_arr);
-      stamen(ix1, iy1, count_o);
+      stamenC(ix1, iy1, count_o,saturation);
     }else if (jpos_arr === "副詞"){
       //副詞
       flowerC4(ix1, iy1, wtype_arr,jpos_arr,saturation,read_arr);
-      stamen(ix1, iy1, count_o);
+      stamenC(ix1, iy1, count_o,saturation);
     }else if (jpos_arr === "助動詞"){
       //助動詞
       leafA(ix1, iy1, wtype_arr,jpos_arr,saturation,read_arr);
@@ -677,15 +683,19 @@ function flower_position(x1, y1, x2, y2, count_p, count_o, part, wtype_arr, wcou
       leafC(ix1, iy1, wtype_arr,jpos_arr,saturation,read_arr);
     }else if(jpos_arr === "接続詞"){
       //接続詞
-      leafD(ix1, iy1, wtype_arr,jpos_arr,saturation,read_arr);
+      leafD(ix1, iy1, wtype_arr,jpos_arr,saturation,read_arr,word);
     }else if((jpos_arr === "助詞-格助詞")||(jpos_arr === "助詞-副助詞")||(jpos_arr === "助詞-係助詞")||
              (jpos_arr === "助詞-接続助詞")||(jpos_arr === "助詞-終助詞")||(jpos_arr === "助詞-準体助詞")){
       //助詞
       leafE(ix1, iy1, wtype_arr,jpos_arr,saturation,read_arr);
-    }else if((jpos_arr === "名詞-数詞")||(jpos_arr === "記号-一般")||(jpos_arr === "記号-文字")||(jpos_arr === "補助記号-一般")||
-    (jpos_arr === "補助記号-括弧開")||(jpos_arr === "補助記号-括弧閉")||(jpos_arr === "補助記号-ＡＡ-一般")||(jpos_arr === "補助記号-ＡＡ-顔文字")){
+    }else if((jpos_arr === "名詞-数詞")||(jpos_arr === "記号-一般")||(jpos_arr === "記号-文字")||(jpos_arr === "補助記号-一般")||(jpos_arr === "感動詞-一般")||(jpos_arr === "感動詞-フィラー")||(jpos_arr === "補助記号-読点")||(jpos_arr === "補助記号-句点")||
+    (jpos_arr === "補助記号-括弧開")||(jpos_arr === "補助記号-括弧閉")||(jpos_arr === "補助記号-AA-一般")||(jpos_arr === "補助記号-AA-顔文字")){
       //数詞と感動詞と記号と補助句号
-      flowerA1(ix1, iy1, wtype_arr,jpos_arr,saturation,read_arr);
+      if ((word === "。" )||( word === ".")||(word === "、" )|| (word === ",")) {
+        noStroke();
+    noFill();}
+      flowerA1(ix1, iy1, wtype_arr,jpos_arr,saturation,read_arr,word);
+      calyx(ix1, iy1,count_o,saturation,word);
     }else{
       //当分は色なしの白い葉っぱ
       leafF(ix1, iy1, wtype_arr,jpos_arr,saturation,read_arr);
@@ -696,172 +706,138 @@ function flower_position(x1, y1, x2, y2, count_p, count_o, part, wtype_arr, wcou
 
 
 
-function flowerA1(ox, oy, type,jpos_arr,saturation,read_arr,lineStyle) {
+function flowerA1(ox, oy, type,jpos_arr,saturation,read_arr,lineStyle,word) {
   console.log(type);
   push();
-
   //透明度
   let alpha = Dakuon(read_arr);
-  let hue = vowelFlower(read_arr);
+  let hue = colorHue(read_arr);
   strokeWeight(3);
+  translate(ox, oy);
+  rotate(random(360));
   stroke(hue, saturation, 100, alpha);
   fill(hue, saturation, 100, alpha);
-  if (jpos_arr === "補助記号-句点") {
-    stroke(0,0,0,0);
-    noFill();
-}
-
-  translate(ox, oy);
-  petal(type, 0.4,0,360,lineStyle);  
+  petal(type, 0.7,0,360,lineStyle);  
   
   pop();
 }
 function flowerA2(ox, oy, type,jpos_arr,saturation,read_arr,lineStyle) {
   console.log(type);
   push();
-
+  
   //透明度
   let alpha = Dakuon(read_arr);
-  let hue = vowelFlower(read_arr);
+  let hue = colorHue(read_arr);
   strokeWeight(3);
   stroke(hue, saturation, 100, alpha);
   fill(hue, saturation, 100, alpha);
-  if (jpos_arr === "補助記号-句点") {
-    stroke(0,0,0,0);
-    noFill();
-}
-
   translate(ox, oy);
-  petal(type, 0.4,0,360,lineStyle);  
+  rotate(random(360));
+  petal(type, 0.7,0,360,lineStyle);  
   tatezima(0,0);
   pop();
 }
 function flowerA3(ox, oy, type,jpos_arr,saturation,read_arr,lineStyle) {
   console.log(type);
   push();
-
   //透明度
   let alpha = Dakuon(read_arr);
-  let hue = vowelFlower(read_arr);
+  let hue = colorHue(read_arr);
   strokeWeight(3);
   stroke(hue, saturation, 100, alpha);
   fill(hue, saturation, 100, alpha);
-  if (jpos_arr === "補助記号-句点") {
-    stroke(0,0,0,0);
-    noFill();
-}
-
   translate(ox, oy);
-  petal(type, 0.4,0,360,lineStyle);  
+  rotate(random(360));
+  petal(type, 0.7,0,360,lineStyle);  
   mizutama1(0,0); 
   pop();
 }
 function flowerB(ox, oy, type,jpos_arr,saturation,read_arr,lineStyle) {
   console.log(type);
   push();
-
   //透明度
   let alpha = Dakuon(read_arr);
-  let hue = vowelFlower(read_arr);
+  let hue = colorHue(read_arr);
   strokeWeight(3);
   stroke(hue, saturation, 100, alpha);
   fill(hue, saturation, 100, alpha);
-  if (jpos_arr === "補助記号-句点") {
-    stroke(0,0,0,0);
-    noFill();
-}
-
   translate(ox, oy);
-  petal(type, 0.4,17,360,lineStyle);   
+  rotate(random(360));
+  petal(type, 0.5,24,360,lineStyle);   
   
   pop();
 }
 function flowerC1(ox, oy, type,jpos_arr,saturation,read_arr,lineStyle) {
   console.log(type);
   push();
-
+  
   //透明度
   let alpha = Dakuon(read_arr);
-  let hue = vowelFlower(read_arr);
+  let hue = colorHue(read_arr);
   strokeWeight(3);
   stroke(hue, saturation, 100, alpha);
   fill(hue, saturation, 100, alpha);
-  if (jpos_arr === "補助記号-句点") {
-    stroke(0,0,0,0);
-    noFill();
-}
   translate(ox, oy);
+  rotate(random(360));
 
-  petal(type, 0.4,0,360,lineStyle);  
-  rotate(30);
-  petal(type, 0.4,0,360,lineStyle); 
+  petal(type, 0.8,0,360,lineStyle);  
+  rotate(90);
+  petal(type, 0.5,0,360,lineStyle); 
   tatezima(0,0);
   pop();
 }
 function flowerC2(ox, oy, type,jpos_arr,saturation,read_arr,lineStyle) {
   console.log(type);
   push();
-
+  
   //透明度
   let alpha = Dakuon(read_arr);
-  let hue = vowelFlower(read_arr);
+  let hue = colorHue(read_arr);
   strokeWeight(3);
   stroke(hue, saturation, 100, alpha);
   fill(hue, saturation, 100, alpha);
-  if (jpos_arr === "補助記号-句点") {
-    stroke(0,0,0,0);
-    noFill();
-}
-
   translate(ox, oy);
-  petal(type, 0.4,0,360,lineStyle);  
-  rotate(30);
-  petal(type, 0.4,0,360,lineStyle);  
+  rotate(random(360));
+  petal(type, 0.8,0,360,lineStyle);  
+  rotate(90);
+  petal(type, 0.5,0,360,lineStyle);  
   
   pop();
 }
 function flowerC3(ox, oy, type,jpos_arr,saturation,read_arr,lineStyle) {
   console.log(type);
   push();
-
+  
   //透明度
   let alpha = Dakuon(read_arr);
-  let hue = vowelFlower(read_arr);
+  let hue = colorHue(read_arr);
   strokeWeight(3);
   stroke(hue, saturation, 100, alpha);
   fill(hue, saturation, 100, alpha);
-  if (jpos_arr === "補助記号-句点") {
-    stroke(0,0,0,0);
-    noFill();
-}
-
   translate(ox, oy);
-  petal(type, 0.4,0,360,lineStyle);   
-  rotate(30);
-  petal(type, 0.4,0,360,lineStyle); 
+  rotate(random(360));
+  petal(type, 0.8,0,360,lineStyle);   
+  rotate(90);
+  petal(type, 0.5,0,360,lineStyle); 
   mizutama1(0,0); 
   pop();
 }
 function flowerC4(ox, oy, type,jpos_arr,saturation,read_arr,lineStyle) {
   console.log(type);
   push();
-
+  
   //透明度
   let alpha = Dakuon(read_arr);
-  let hue = vowelFlower(read_arr);
+  let hue = colorHue(read_arr);
   strokeWeight(3);
   stroke(hue, saturation, 100, alpha);
   fill(hue, saturation, 100, alpha);
-  if (jpos_arr === "補助記号-句点") {
-    stroke(0,0,0,0);
-    noFill();
-}
-
   translate(ox, oy);
-  petal(type, 0.4,17,360,lineStyle);  
+  rotate(random(360));
+  petal(type, 0.5,24,360,lineStyle);  
   
-  rotate(30);
-  petal(type, 0.4,17,360,lineStyle); 
+  rotate(90);
+  petal(type, 0.3,24,360,lineStyle); 
   mizutama2(0,0);
   pop();
 }
@@ -1053,15 +1029,11 @@ function leafA(ox, oy, type,jpos_arr,saturation,read_arr,lineStyle) {
   strokeWeight(3);
   //透明度
   let alpha = Dakuon(read_arr);
-  let hue = vowelLeaf(read_arr);
+  let hue = colorHue(read_arr);
   stroke(hue, saturation, 100, alpha);
   fill(hue, saturation, 100, alpha);
-  if ((jpos_arr === "補助記号-読点")||(jpos_arr === "補助記号-句点")) {
-    stroke(0,0,0,0);
-    noFill();
-}
-  
-  petal(type,0.4,17,135,lineStyle);  
+  rotate(random(-90,0));
+  petal(type,0.5,28,135,lineStyle);  
   pop();
 }
 function leafB(ox, oy, type,jpos_arr,saturation,read_arr,lineStyle) {
@@ -1072,17 +1044,16 @@ function leafB(ox, oy, type,jpos_arr,saturation,read_arr,lineStyle) {
   strokeWeight(3);
   //透明度
   let alpha = Dakuon(read_arr);
-  let hue = vowelLeaf(read_arr);
+  let hue = colorHue(read_arr);
   stroke(hue, saturation, 100, alpha);
-  fill(hue, saturation, 100, alpha);
-
-  if ((jpos_arr === "補助記号-読点")||(jpos_arr === "補助記号-句点")) {
-    stroke(0,0,0,0);
-    noFill();
-}
   
-  petal(type,0.4,0,135,lineStyle);  
-  sankaku1(ox,oy);
+  fill(hue, saturation, 100, alpha);
+  rotate(random(-90,0));
+  
+  petal(type,0.8,0,135,lineStyle); 
+  stroke(hue, 0, 100, alpha);  
+  fill(hue, 0, 100, alpha);
+  petal(type,0.5,0,135,lineStyle); 
   pop();
 }
 function leafC(ox, oy, type,jpos_arr,saturation,read_arr,lineStyle) {
@@ -1093,19 +1064,19 @@ function leafC(ox, oy, type,jpos_arr,saturation,read_arr,lineStyle) {
   strokeWeight(3);
   //透明度
   let alpha = Dakuon(read_arr);
-  let hue = vowelLeaf(read_arr);
+  let hue = colorHue(read_arr);
   stroke(hue, saturation, 100, alpha);
   fill(hue, saturation, 100, alpha);
-  if ((jpos_arr === "補助記号-読点")||(jpos_arr === "補助記号-句点")) {
-    stroke(0,0,0,0);
-    noFill();
-}
-
-petal(type,0.4,0,135,lineStyle);  
-sankaku2(0,0);
+  rotate(random(-90,0));
+stroke(hue, 0, 100, alpha); 
+fill(hue, 0, 100, alpha);
+petal(type,0.8,0,135,lineStyle); 
+stroke(hue, saturation, 100, alpha);
+fill(hue, saturation, 100, alpha);
+petal(type,0.5,0,135,lineStyle); 
 pop();
 }
-function leafD(ox, oy, type,jpos_arr,saturation,read_arr,lineStyle) {
+function leafD(ox, oy, type,jpos_arr,saturation,read_arr,lineStyle,word) {
   
 
   push();
@@ -1113,16 +1084,14 @@ function leafD(ox, oy, type,jpos_arr,saturation,read_arr,lineStyle) {
   strokeWeight(3);
   //透明度
   let alpha = Dakuon(read_arr);
-  let hue = vowelLeaf(read_arr);
+  let hue = colorHue(read_arr);
   stroke(hue, saturation, 100, alpha);
   fill(hue, saturation, 100, alpha);
-  if ((jpos_arr === "補助記号-読点")||(jpos_arr === "補助記号-句点")) {
+  if ((word === "。" )||( word === ".")||(word === "、" )|| (word === ",")) {
     stroke(0,0,0,0);
-    noFill();
-}
-  
-  
-  petal(type,0.4,0,135,lineStyle); 
+    fill(0,0,0,0);}
+    rotate(random(-90,0));
+  petal(type,0.8,0,135,lineStyle); 
   yoko(0,0);
   pop();
 }
@@ -1134,15 +1103,11 @@ function leafE(ox, oy, type,jpos_arr,saturation,read_arr,lineStyle) {
   strokeWeight(3);
   //透明度
   let alpha = Dakuon(read_arr);
-  let hue = vowelLeaf(read_arr);
+  let hue = colorHue(read_arr);
   stroke(hue, saturation, 100, alpha);
   fill(hue, saturation, 100, alpha);
-  if ((jpos_arr === "補助記号-読点")||(jpos_arr === "補助記号-句点")) {
-    stroke(0,0,0,0);
-    noFill();
-}
-  
-  petal(type,0.4,0,135,lineStyle);  
+  rotate(random(-90,0));
+  petal(type,0.8,0,135,lineStyle);  
   pop();
 }
 function leafF(ox, oy, type,jpos_arr,saturation,read_arr,lineStyle) {
@@ -1153,37 +1118,105 @@ function leafF(ox, oy, type,jpos_arr,saturation,read_arr,lineStyle) {
   strokeWeight(3);
   //透明度
   let alpha = Dakuon(read_arr);
-  let hue = vowelLeaf(read_arr);
+  let hue = colorHue(read_arr);
   stroke(hue, saturation, 100, alpha);
-  fill(hue, saturation, 100, alpha);
-  if ((jpos_arr === "補助記号-読点")||(jpos_arr === "補助記号-句点")) {
-    stroke(0,0,0,0);
-    noFill();
-}
-  petal(type,0.4,0,135,lineStyle);  
+  noFill();
+  rotate(random(-90,0));
+  petal(type,1,0,135,lineStyle);  
   pop();
 }
 
 
 
-//おしべとめしべ
-function stamen(ox, oy, count_o) {
-  //おしべ
+//おしべ白
+function stamenA(ox, oy, count_o) {
   push();
   translate(ox, oy);
-  strokeWeight(1);
+  rotate(random(360));
+  strokeWeight(3);
   fill(10, 0, 100, 100);
   stroke(10, 0, 100, 80);
   for (var ang = 0; ang < 360; ang += 360 / count_o) {
-    var x = 15 * cos(ang);
-    var y = 15 * sin(ang);
+    var x = 25 * cos(ang);
+    var y = 25 * sin(ang);
     line(0, 0, x, y);
-    ellipse(x, y, 5, 5);
+    ellipse(x, y, 10, 10);
   }
   fill(10, 0, 100, 100);
   stroke(10, 0, 100, 80);
 
-  ellipse(0, 0, 12, 12);
+  ellipse(0, 0, 20, 20);
+  pop();
+}
+
+//おしべ黄緑
+function stamenB(ox, oy, count_o,saturation) {
+  push();
+  translate(ox, oy);
+  rotate(random(360));
+  strokeWeight(3);
+  fill(90, saturation, 100, 100);
+  stroke(90, saturation, 100, 80);
+  for (var ang = 0; ang < 360; ang += 360 / count_o) {
+    var x = 25 * cos(ang);
+    var y = 25 * sin(ang);
+    line(0, 0, x, y);
+    ellipse(x, y, 10, 10);
+  }
+  
+
+  ellipse(0, 0, 20, 20);
+  pop();
+}
+//おしべ黄色
+function stamenC(ox, oy, count_o,saturation) {
+  push();
+  translate(ox, oy);
+  rotate(random(360));
+  strokeWeight(3);
+  fill(40, saturation, 100, 100);
+  stroke(40, saturation, 100, 80);
+  for (var ang = 0; ang < 360; ang += 360 / count_o) {
+    var x = 25 * cos(ang);
+    var y = 25 * sin(ang);
+    line(0, 0, x, y);
+    ellipse(x, y, 10, 10);
+  }
+  
+
+  ellipse(0, 0, 20, 20);
+  pop();
+}
+
+//ヘタ
+function calyx(ox, oy, count_o,saturation,word) {
+  push();
+  translate(ox, oy);
+  rotate(random(360));
+  let size = 0.3;
+  let a = 0;
+  noStroke();
+  fill(100, saturation, 70, 100);
+  if (word === "。" || word === "."||word === "、" || word === ",") {
+    noStroke();
+    noFill();}
+
+  for (var ang = 0; ang < 360; ang += 360 / count_o) {
+    angle = 360/count_o;
+    rotate(angle);
+    push();
+    beginShape();
+    curveVertex(0,0-a);
+    curveVertex(0,0-a);
+    curveVertex(-35*size,-45*size-a);
+    curveVertex(0,-85*size-a);
+    curveVertex(35*size,-45*size-a);
+    curveVertex(0,0-a);
+    curveVertex(0,0-a);
+    endShape();
+    pop();
+  }
+  ellipse(0, 0, 16, 16);
   pop();
 }
 
@@ -1191,60 +1224,63 @@ function stamen(ox, oy, count_o) {
 function rootA(ox, oy, count_o){
   push();
   translate(ox, oy);
-  rotate(45);
+  rotate(55);
   strokeWeight(3);
   fill(10, 0, 100, 100);
   stroke(10, 0, 100, 80);
   strokeCap(ROUND);
   for (var ang = 0; ang < 135; ang += 135 / count_o) {
-    var x = 65 * cos(ang);
-    var y = 65 * sin(ang);
+    var x = 100 * cos(ang);
+    var y = 100 * sin(ang);
     line(0, 0, x, y);
     ellipse(x, y, 10, 10);
+    strokeWeight(1.7);
+    line(x, y, x*1.1, y*1.1);
   }
   pop();
 }
-function rootB(ox, oy, count_o){
+function rootB(ox, oy, count_o,saturation){
   push();
   translate(ox, oy);
-  rotate(45);
+  rotate(55);
   strokeWeight(3);
-  fill(10, 0, 100, 100);
-  stroke(10, 0, 100, 80);
+  fill(90, saturation, 100, 100);
+  stroke(90, saturation, 100, 80);
   strokeCap(ROUND);
   for (var ang = 0; ang < 135; ang += 135 / count_o) {
-    var x = 65 * cos(ang);
-    var y = 65 * sin(ang);
-    drawingContext.setLineDash([10,10]);
+    var x = 200 * cos(ang);
+    var y = 200 * sin(ang);
+    drawingContext.setLineDash([5,20]);
     line(0, 0, x, y);
   }
   pop();
 }
-function rootC(ox, oy,count_o) {
+function rootC(ox, oy,count_o,saturation) {
   push();
   translate(ox, oy);
-  rotate(45);
+  rotate(55);
   strokeWeight(3);
-  fill(10, 0, 100, 100);
-  stroke(10, 0, 100, 80);
+  fill(40,saturation, 100, 100);
+  stroke(40,saturation, 100, 80);
   strokeCap(ROUND);
   for (var ang = 0; ang < 135; ang += 135 / count_o) {
-    var x = 65 * cos(ang);
-    var y = 65 * sin(ang);
+    var x = 200 * cos(ang);
+    var y = 200 * sin(ang);
     line(0, 0, x, y);
   }
+  pop();
 }
 function rootD(ox, oy, count_o){
   push();
   translate(ox, oy);
-  rotate(45);
+  rotate(80);
   strokeWeight(3);
   fill(10, 0, 100, 100);
   stroke(10, 0, 100, 80);
   strokeCap(ROUND);
-  for (var ang = 0; ang < 135; ang += 135 / count_o) {
-    var x = 65 * cos(ang);
-    var y = 65 * sin(ang);
+  for (var ang = 0; ang < 20; ang += 20 / count_o) {
+    var x = 200 * cos(ang);
+    var y = 200 * sin(ang);
     line(0, 0, x, y);
   }
   pop();
@@ -1253,6 +1289,7 @@ function rootD(ox, oy, count_o){
 
 //揺らぎのある線
 function waveLine(x1,y1,x2,y2){
+  strokeCap(ROUND);
   let steps = 40;
 let xStep = (x2 - x1) / steps;
 let yStep = (y2 - y1) / steps;
@@ -1269,6 +1306,19 @@ y1 += yStep;
 vertex(x2, y2);
 endShape();
 }
+//くるくるの線
+function spiralLine(x1, y1, x2, y2) {
+  push();
+  beginShape();
+  angleMode(RADIANS);
+  for(let theta = 0; theta < dist(x1,y1,x2,y2)/4; theta +=1) {
+      let x = map(theta, 0, dist(x1,y1,x2,y2)/4, x1, x2) + 12*cos(0.8*theta);
+      let y = map(theta, 0, dist(x1,y1,x2,y2)/4, y1, y2)+ 12*sin(0.8*theta);
+      curveVertex(x, y);
+  }
+  endShape();
+  pop();
+}
 
 //花の柄の関数
 
@@ -1279,11 +1329,11 @@ function mizutama1(ox,oy){
   blendMode(OVERLAY);
   fill(10, 0, 100, 80);
   stroke(10, 0, 100, 100);
-  for (var ang = 0; ang < 360; ang += 360 / 10) {
-    var x = 20 * cos(ang);
-    var y = 20 * sin(ang);
-    ellipse(x, y, 7, 7);
-    ellipse(x*1.6, y*1.6, 5, 5);
+  for (var ang = 0; ang < 360; ang += 360 / 14) {
+    var x = 21 * cos(ang);
+    var y = 21 * sin(ang);
+    ellipse(x*1.6, y*1.6, 12, 12);
+    ellipse(x*2.5, y*2.5, 8, 8);
   }
   
   pop();
@@ -1293,13 +1343,13 @@ function mizutama2(ox,oy){
   translate(ox, oy);
   strokeWeight(1);
   blendMode(OVERLAY);
-  fill(10, 0, 100, 80);
-  stroke(10, 0, 100, 100);
-  for (var ang = 0; ang < 360; ang += 360 / 10) {
+  fill(0, 0, 100, 100);
+  stroke(0, 0, 100, 100);
+  for (var ang = 0; ang < 360; ang += 360 / 14) {
     var x = 30 * cos(ang);
     var y = 30 * sin(ang);
-    ellipse(x, y, 10, 10);
-    ellipse(x*1.6, y*1.6, 7, 7);
+    ellipse(x*1.4, y*1.4, 12, 12);
+    ellipse(x*2, y*2, 8, 8);
   }
   
   pop();
@@ -1309,73 +1359,27 @@ function tatezima(ox,oy){
   push();
   translate(ox, oy);
   blendMode(OVERLAY);
-  strokeWeight(1.5);
+  strokeWeight(1.7);
   strokeCap(ROUND);
-  fill(10, 0, 100, 80);
-  stroke(10, 0, 100, 100);
-  for (var ang = 0; ang < 360; ang += 360 / 20) {
+  fill(10, 0, 100, 50);
+  stroke(10, 0, 100, 50);
+  for (var ang = 0; ang < 360; ang += 360 / 30) {
     var x = 23 * cos(ang);
     var y = 23 * sin(ang);
-    line(x, y, 1.4*x, 1.4*y);
+    line(x, y, 3*x, 3*y);
+    line(1.5*x, 1.5*y,3*x, 3*y);
     
   }
   
   pop();
 } 
-function sankaku1(ox,oy){
-  push();
-  translate(ox, oy);
-  rotate(-75);
-  strokeWeight(1);
-  blendMode(OVERLAY);
-  fill(10, 0, 100, 80);
-  stroke(10, 0, 100, 100);
-  for (let i = 0; i < 100; i+=20) {
-    
-    push();
-    let x = 20 * cos(i);
-    let y = 20 * sin(i);
-    rotate(i);
-    beginShape();
-    vertex(-4+x,0+y);
-    vertex(0+x,8+y);
-    vertex(4+x,0+y);
-    endShape(CLOSE);
-    pop();
-  }
-  
-  pop();
-} 
-function sankaku2(ox,oy){
-  push();
-  translate(ox, oy);
-  rotate(-75);
-  strokeWeight(1);
-  blendMode(OVERLAY);
-  fill(10, 0, 0, 80);
-  stroke(10, 0, 0, 100);
-  for (let i = 0; i < 100; i+=20) {
-    
-    push();
-    let x = 20 * cos(i);
-    let y = 20 * sin(i);
-    rotate(i);
-    beginShape();
-    vertex(-4+x,0+y);
-    vertex(0+x,8+y);
-    vertex(4+x,0+y);
-    endShape(CLOSE);
-    pop();
-  }
-  
-  pop();
-} 
+
 function yoko(ox,oy){
   push();
   blendMode(OVERLAY);
   translate(ox, oy);
   rotate(-75);
-  strokeWeight(1);
+  strokeWeight(3);
   fill(10, 0, 100, 80);
   stroke(10, 0, 100, 100);
   for (var ang = 0; ang < 180; ang +=2) {
