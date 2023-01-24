@@ -482,7 +482,7 @@ function drawText(x1, y1,x2,y2,jpos_arr,word){
   var iy2 =  windowHeight/10 + y2 * 50;
   textFont('Zen Kaku Gothic New');
     if (x1 === root) {
-      //text(word, ix1-40, iy1+ 250 );
+      text(word, ix1-40, iy1+ 250 );
       strokeWeight(1.7);
       waveLine(0,iy1+ 250,windowWidth*2,iy1+ 250);
     } else if (y1 === x2 && x2 === root) {
@@ -491,14 +491,14 @@ function drawText(x1, y1,x2,y2,jpos_arr,word){
         stroke(0,0,0,0);
       }else{stroke(255,100);
         strokeWeight(1);}
-      //text(word, ix1-35, iy1-10 );
+      text(word, ix1-35, iy1-10 );
     } else if (y1 === x2 && x2 !== root) {
       if (word === "。" || word === "."||word === "、" || word === ",") {
         noFill();
         stroke(0,0,0,0);
       }else{stroke(255,100);
         strokeWeight(1);}
-      //text(word, ix1-35, iy1-10 );
+      text(word, ix1-35, iy1-10 );
     }
     
 }
