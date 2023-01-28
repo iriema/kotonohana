@@ -6,8 +6,8 @@
         
         <link rel = "stylesheet" type="text/css" href="/static/css/reset.css">
         <link rel = "stylesheet" type="text/css" href="/static/css/style.css">
-        <meta name="viewport" content="width=device-width,initial-scale=1">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <meta name="viewport" content="width=device-width,initial-scale=1, viewport-fit=cover" >
+       <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@300;400;500&display=swap" rel="stylesheet">
         
@@ -19,24 +19,26 @@
                 <div id="user_input_box">
                     <textarea id="w_box" type="text" name="w_box" placeholder="咲かせたい文章を入力" maxlength="200" required></textarea>
                     <div class="button1">
-                        <button id="button">ことのはなを咲かせる</button>
-                        <script>function karitori(){location.reload()}</script>
-                        <input id="karitori" type="button" onclick="karitori()">
+                        <button id="draw">ことのはなを咲かせる</button>
+                        <button id="textView"></button>
+                        <button id="save"></button>
+                        <input id="relord" type="button" onclick="relord()">
+                        <script>function relord(){location.reload()}</script>
                         
-                        <button id="tumitori" type="button"></button>
-                        <script>function karitori(){location.reload()}</script>
                     </div>
                 </div>
              </section>
 
         
             <section id="container1"></section>
+            
         
        
         
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/p5.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.5.0/p5.min.js"></script>
     <script type="text/javascript" src="/static/js/script.js"></script>
+   
     
     </body>
 </html>
