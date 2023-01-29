@@ -401,7 +401,7 @@ function Dakuon(words){
     for (let j = 0; j < word.length; j++) {
       if (dakuonChars.includes(word[j])) {
         
-        return 90;
+        return 100;
       }else if((word === "。" )||( word === ".")||(word === "、" )|| (word === ",")) {
         return 0;
       }else{
@@ -856,7 +856,7 @@ function flowerC1(ox, oy, type,jpos_arr,saturation,read_arr,lineStyle) {
   //rotate(frameCount);
 
   petal(type, 0.8,0,360,lineStyle);  
-  rotate(90);
+  rotate(45);
   petal(type, 0.5,0,360,lineStyle); 
   tatezima(0,0);
   pop();
@@ -874,7 +874,7 @@ function flowerC2(ox, oy, type,jpos_arr,saturation,read_arr,lineStyle) {
   translate(ox, oy);
   //rotate(frameCount);
   petal(type, 0.8,0,360,lineStyle);  
-  rotate(90);
+  rotate(45);
   petal(type, 0.5,0,360,lineStyle);  
   
   pop();
@@ -892,7 +892,7 @@ function flowerC3(ox, oy, type,jpos_arr,saturation,read_arr,lineStyle) {
   translate(ox, oy);
   //rotate(random(360));
   petal(type, 0.8,0,360,lineStyle);   
-  rotate(90);
+  rotate(45);
   petal(type, 0.5,0,360,lineStyle); 
   mizutama1(0,0); 
   pop();
@@ -911,8 +911,8 @@ function flowerC4(ox, oy, type,jpos_arr,saturation,read_arr,lineStyle) {
   rotate(frameCount);
   petal(type, 0.5,24,360,lineStyle);  
   
-  rotate(90);
-  petal(type, 0.3,24,360,lineStyle); 
+  rotate(45);
+  petal(type, 0.3,30,360,lineStyle); 
   mizutama2(0,0);
   pop();
 }
@@ -1117,7 +1117,7 @@ function leafA(ox, oy, type,jpos_arr,saturation,read_arr,lineStyle) {
   petal(type,0.5,28,135,lineStyle);  
   pop();
 }
-function leafB(ox, oy, type,jpos_arr,saturation,read_arr,lineStyle) {
+function leafC(ox, oy, type,jpos_arr,saturation,read_arr,lineStyle) {
   
 
   push();
@@ -1139,7 +1139,7 @@ function leafB(ox, oy, type,jpos_arr,saturation,read_arr,lineStyle) {
   pop();
   pop();
 }
-function leafC(ox, oy, type,jpos_arr,saturation,read_arr,lineStyle) {
+function leafB(ox, oy, type,jpos_arr,saturation,read_arr,lineStyle) {
   
 
   push();
@@ -1502,6 +1502,8 @@ function yoko(ox,oy){
     point(x,y);
     point(x*2,y*2);
     point(x*3,y*3);
+    point(x*4,y*4);
+    point(x*5,y*5);
    
     
   }
