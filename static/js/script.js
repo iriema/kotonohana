@@ -188,7 +188,7 @@ function draw() {
         }
       }
 //全体の色
-let filterPink = jarr.some((f) => (f.jpos === "名詞-普通名詞-一般" && f.lemma==="ピンク" ) ||(f.jpos === "名詞-普通名詞-一般" && f.lemma==="ピンク色" )||(f.jpos === "名詞-普通名詞-一般" && f.lemma==="ぴんく" )||(f.jpos === "名詞-普通名詞-一般" && f.lemma==="ぴんく色" )||(f.jpos === "名詞-普通名詞-一般" && f.lemma==="桃色"||(f.jpos === "名詞-普通名詞-一般" && f.lemma==="もも色" )||(f.jpos === "名詞-普通名詞-一般" && f.lemma==="桃" ) ));
+let filterPink = jarr.some((f) => (f.jpos === "名詞-普通名詞-一般" && f.lemma==="ピンク" ) ||(f.jpos === "名詞-普通名詞-一般" && f.lemma==="ピンク色" )||(f.jpos === "名詞-普通名詞-一般" && f.lemma==="ぴんく" )||(f.jpos === "名詞-普通名詞-一般" && f.lemma==="ぴんく色" )||(f.jpos === "名詞-普通名詞-一般" && f.lemma==="桃色"||(f.jpos === "名詞-普通名詞-一般" && f.lemma==="もも色" )||(f.jpos === "名詞-普通名詞-一般" && f.lemma==="桃いろ" ) ));
 if(filterPink === true){
   push();
   blendMode(DODGE);
@@ -203,7 +203,7 @@ if(filterPink === true){
 }
 pop();
 }
-let filterMurasaki = jarr.some((f) => (f.jpos === "名詞-普通名詞-一般" && f.lemma==="紫" ) ||(f.jpos === "名詞-普通名詞-一般" && f.lemma==="むらさき" )||(f.jpos === "名詞-普通名詞-一般" && f.lemma==="ムラサキ" )||(f.jpos === "名詞-普通名詞-一般" && f.lemma==="紫色" )||(f.jpos === "名詞-普通名詞-一般" && f.lemma==="むらさき色"||(f.jpos === "名詞-普通名詞-一般" && f.lemma==="ムラサキ色" )));
+let filterMurasaki = jarr.some((f) => (f.jpos === "名詞-普通名詞-一般" && f.lemma==="紫" ) ||(f.jpos === "名詞-普通名詞-一般" && f.lemma==="むらさき" )||(f.jpos === "名詞-普通名詞-一般" && f.lemma==="ムラサキ" )||(f.jpos === "名詞-普通名詞-一般" && f.lemma==="紫色" )||(f.jpos === "名詞-普通名詞-一般" && f.lemma==="むらさき色"||(f.jpos === "名詞-普通名詞-一般" && f.lemma==="ムラサキ色" )||(f.jpos === "名詞-普通名詞-一般" && f.lemma==="パープル" )||(f.jpos === "名詞-普通名詞-一般" && f.lemma==="ヴァイオレット" )||(f.jpos === "名詞-普通名詞-一般" && f.lemma==="すみれ色" )));
 if(filterMurasaki === true){
   push();
   blendMode(MULTIPLY);
@@ -248,7 +248,7 @@ if(filterOrenge === true){
 }
 pop();
 }
-let filterBlue = jarr.some((f) => (f.jpos === "名詞-普通名詞-一般" && f.lemma==="青" ) ||(f.jpos === "名詞-普通名詞-一般" && f.lemma==="蒼" )||(f.jpos === "名詞-普通名詞-一般" && f.lemma==="碧" )||(f.jpos === "名詞-普通名詞-一般" && f.lemma==="あお" )||(f.jpos === "名詞-普通名詞-一般" && f.lemma==="アオ"||(f.jpos === "名詞-普通名詞-一般" && f.lemma==="青色" )||(f.jpos === "名詞-普通名詞-一般" && f.lemma==="蒼色" )||(f.jpos === "名詞-普通名詞-一般" && f.lemma==="碧色" )||(f.jpos === "名詞-普通名詞-一般" && f.lemma==="あお色" )||(f.jpos === "名詞-普通名詞-一般" && f.lemma==="アオ色" )||(f.jpos === "名詞-普通名詞-一般" && f.lemma==="ブルー" )||
+let filterBlue = jarr.some((f) => (f.jpos === "名詞-普通名詞-一般" && f.lemma==="青" ) ||(f.jpos === "名詞-普通名詞-一般" && f.lemma==="蒼" )||(f.jpos === "名詞-普通名詞-一般" && f.lemma==="碧" )||(f.jpos === "名詞-普通名詞-一般" && f.lemma==="あお" )||(f.jpos === "名詞-普通名詞-一般" && f.lemma==="アオ"||(f.jpos === "名詞-普通名詞-一般" && f.lemma==="青色" )||(f.jpos === "名詞-普通名詞-一般" && f.lemma==="蒼色" )||(f.jpos === "名詞-普通名詞-一般" && f.lemma==="碧色" )||(f.jpos === "名詞-普通名詞-一般" && f.lemma==="あお色" )||(f.jpos === "名詞-普通名詞-一般" && f.lemma==="アオ色" )||(f.jpos === "名詞-普通名詞-一般" && f.lemma==="ブルー" )||(f.jpos === "名詞-普通名詞-一般" && f.lemma==="真っ青" )||
 (f.jpos === "形容詞-一般" && f.lemma==="青い" ) ||(f.jpos === "形容詞-一般" && f.lemma==="蒼い" ) ||(f.jpos === "形容詞-一般" && f.lemma==="碧い" ) ||(f.jpos === "形容詞-一般" && f.lemma==="あおい" ) ||(f.jpos === "形容詞-一般" && f.lemma==="アオい" )));
 if(filterBlue === true){
   push();
@@ -280,7 +280,7 @@ if(filterYellow === true){
 }
 pop();
 }
-let filterRed = jarr.some((f) => (f.jpos === "名詞-普通名詞-一般" && f.lemma==="赤" ) ||(f.jpos === "名詞-普通名詞-一般" && f.lemma==="紅" )||(f.jpos === "名詞-普通名詞-一般" && f.lemma==="緋" )||(f.jpos === "名詞-普通名詞-一般" && f.lemma==="朱" )||(f.jpos === "名詞-普通名詞-一般" && f.lemma==="あか" )||(f.jpos === "名詞-普通名詞-一般" && f.lemma==="アカ" )||(f.jpos === "名詞-普通名詞-一般" && f.lemma==="あか" )||(f.jpos === "名詞-普通名詞-一般" && f.lemma==="レッド" )||(f.jpos === "名詞-普通名詞-一般" && f.lemma==="赤色" )||(f.jpos === "名詞-普通名詞-一般" && f.lemma==="紅色" )||(f.jpos === "名詞-普通名詞-一般" && f.lemma==="朱色" )||(f.jpos === "名詞-普通名詞-一般" && f.lemma==="緋色" )||(f.jpos === "名詞-普通名詞-一般" && f.lemma==="あか色" )||(f.jpos === "名詞-普通名詞-一般" && f.lemma==="アカ色" )||
+let filterRed = jarr.some((f) => (f.jpos === "名詞-普通名詞-一般" && f.lemma==="赤" ) ||(f.jpos === "名詞-普通名詞-一般" && f.lemma==="紅" )||(f.jpos === "名詞-普通名詞-一般" && f.lemma==="緋" )||(f.jpos === "名詞-普通名詞-一般" && f.lemma==="朱" )||(f.jpos === "名詞-普通名詞-一般" && f.lemma==="あか" )||(f.jpos === "名詞-普通名詞-一般" && f.lemma==="アカ" )||(f.jpos === "名詞-普通名詞-一般" && f.lemma==="あか" )||(f.jpos === "名詞-普通名詞-一般" && f.lemma==="レッド" )||(f.jpos === "名詞-普通名詞-一般" && f.lemma==="赤色" )||(f.jpos === "名詞-普通名詞-一般" && f.lemma==="紅色" )||(f.jpos === "名詞-普通名詞-一般" && f.lemma==="朱色" )||(f.jpos === "名詞-普通名詞-一般" && f.lemma==="緋色" )||(f.jpos === "名詞-普通名詞-一般" && f.lemma==="あか色" )||(f.jpos === "名詞-普通名詞-一般" && f.lemma==="アカ色" )||(f.jpos === "名詞-普通名詞-一般" && f.lemma==="真っ赤" )||
 (f.jpos === "形容詞-一般" && f.lemma==="赤い" ) ||(f.jpos === "形容詞-一般" && f.lemma==="緋い" ) ||(f.jpos === "形容詞-一般" && f.lemma==="紅い" )||(f.jpos === "形容詞-一般" && f.lemma==="朱い" )||(f.jpos === "形容詞-一般" && f.lemma==="あかい" )||(f.jpos === "形容詞-一般" && f.lemma==="アカイ" ));
 if(filterRed === true){
   push();
@@ -296,7 +296,7 @@ if(filterRed === true){
 }
 pop();
 }
-let filterWhite = jarr.some((f) => (f.jpos === "名詞-普通名詞-一般" && f.lemma==="白" ) ||(f.jpos === "名詞-普通名詞-一般" && f.lemma==="シロ" )||(f.jpos === "名詞-普通名詞-一般" && f.lemma==="しろ" )||(f.jpos === "名詞-普通名詞-一般" && f.lemma==="白色" )||(f.jpos === "名詞-普通名詞-一般" && f.lemma==="しろ色" )||(f.jpos === "名詞-普通名詞-一般" && f.lemma==="シロ色" )||
+let filterWhite = jarr.some((f) => (f.jpos === "名詞-普通名詞-一般" && f.lemma==="白" ) ||(f.jpos === "名詞-普通名詞-一般" && f.lemma==="シロ" )||(f.jpos === "名詞-普通名詞-一般" && f.lemma==="しろ" )||(f.jpos === "名詞-普通名詞-一般" && f.lemma==="白色" )||(f.jpos === "名詞-普通名詞-一般" && f.lemma==="しろ色" )||(f.jpos === "名詞-普通名詞-一般" && f.lemma==="シロ色" )||(f.jpos === "名詞-普通名詞-一般" && f.lemma==="真っ白" )||(f.jpos === "名詞-普通名詞-一般" && f.lemma==="ホワイト" )
 (f.jpos === "形容詞-一般" && f.lemma==="白い" ) ||(f.jpos === "形容詞-一般" && f.lemma==="シロイ" ) ||(f.jpos === "形容詞-一般" && f.lemma==="しろい" ));
 if(filterWhite === true){
   push();
@@ -313,7 +313,7 @@ if(filterWhite === true){
 pop();
 }
 
-let filterBlack = jarr.some((f) => (f.jpos === "名詞-普通名詞-一般" && f.lemma==="黒" ) ||(f.jpos === "名詞-普通名詞-一般" && f.lemma==="クロ" )||(f.jpos === "名詞-普通名詞-一般" && f.lemma==="くろ" )||(f.jpos === "名詞-普通名詞-一般" && f.lemma==="黒色" )||(f.jpos === "名詞-普通名詞-一般" && f.lemma==="くろ色" )||(f.jpos === "名詞-普通名詞-一般" && f.lemma==="クロ色" )||
+let filterBlack = jarr.some((f) => (f.jpos === "名詞-普通名詞-一般" && f.lemma==="黒" ) ||(f.jpos === "名詞-普通名詞-一般" && f.lemma==="クロ" )||(f.jpos === "名詞-普通名詞-一般" && f.lemma==="くろ" )||(f.jpos === "名詞-普通名詞-一般" && f.lemma==="黒色" )||(f.jpos === "名詞-普通名詞-一般" && f.lemma==="くろ色" )||(f.jpos === "名詞-普通名詞-一般" && f.lemma==="クロ色" )||(f.jpos === "名詞-普通名詞-一般" && f.lemma==="真っ黒" )||(f.jpos === "名詞-普通名詞-一般" && f.lemma==="ブラック" )
 (f.jpos === "形容詞-一般" && f.lemma==="黒い" ) ||(f.jpos === "形容詞-一般" && f.lemma==="クロイ" ) ||(f.jpos === "形容詞-一般" && f.lemma==="くろい" ));
 if(filterBlack === true){
   push();
@@ -911,7 +911,7 @@ function flowerC4(ox, oy, type,jpos_arr,saturation,read_arr,lineStyle) {
   
   petal(type, 0.8,0,360,lineStyle);  
   
-  rotate(90);
+  rotate(45);
   petal(type, 0.8,0,360,lineStyle); 
   mizutama1(0,0);
   pop();
@@ -1454,9 +1454,9 @@ function mizutama1(ox,oy){
   fill(10, 0, 100, 80);
   stroke(10, 0, 100, 100);
   for (var ang = 0; ang < 360; ang += 360 / 8) {
-    var x = 17 * cos(ang);
-    var y = 17 * sin(ang);
-    ellipse(x*1.4, y*1.4, 12, 12);
+    var x = 20 * cos(ang);
+    var y = 20 * sin(ang);
+    ellipse(x*1.5, y*1.5, 12, 12);
     ellipse(x*2.3, y*2.3, 8, 8);
   }
   
