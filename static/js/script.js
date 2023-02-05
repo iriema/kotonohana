@@ -1502,7 +1502,7 @@ function yoko(ox,oy){
   push();
   blendMode(OVERLAY);
   translate(ox, oy);
-  rotate(-75);
+  rotate(0);
   strokeWeight(3);
   fill(10, 0, 100, 80);
   stroke(10, 0, 100, 100);
